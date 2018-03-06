@@ -4,6 +4,7 @@ import matplotlib.colors as col
 import matplotlib.image as mpimg
 from scipy import signal
 from scipy import ndimage
+import cv2
 
 
 def extractValueChannel(image):
@@ -24,7 +25,7 @@ if __name__ == '__main__' :
     plt.imshow(valueChannel)
     plt.set_cmap("gray")
     #Add noise to the image
-    noisy = valueChannel + 0.4*valueChannel.std() * np.random.random(valueChannel.shape)
+    noisy = valueChannel + 0.8*valueChannel.std() * np.random.random(valueChannel.shape)
     plt.figure("Noisy Image", figsize=(10,10))
     plt.imshow(noisy)
     plt.set_cmap("gray")
@@ -63,6 +64,10 @@ if __name__ == '__main__' :
     G = np.sqrt(Ix**2 + Iy**2)
     plt.figure("Sobel Filter", figsize=(10,10))
     plt.imshow(G)
+    
+    cannyImage = cv2.Canny(np.uint8(linesVChannel),100,200);
+    plt.figure("CannY Image", figsize=(10,10))
+    plt.imshow(cannyImage)
     plt.show()
     
     
